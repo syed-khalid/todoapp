@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
-function InputForm() {
+function InputForm({ todoList, setTodoList }) {
+	const [input, setInput] = useState("");
+
+	const onSubmitHandler = (e) => {
+		e.preventDefault();
+		setTodoList([...todoList, input]);
+		setInput("");
+	};
+
+	const onChangeHandler = (e) => {
+		setInput(e.target.value);
+	};
+
 	return (
 		<div>
-			<h2>InputForm</h2>
+			<form onSubmit={onSubmitHandler}>
+				<input
+					type='text'
+					name='input'
+					id='input'
+					value={input}
+					onChange={onChangeHandler}
+				/>
+				<button type='submit'>Submit</button>
+			</form>
 		</div>
 	);
 }
